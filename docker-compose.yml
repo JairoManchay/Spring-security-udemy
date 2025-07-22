@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: postgres:latest
+    container_name: security_app
+    restart: always
+    volumes:
+      - ./db/sql/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
+      - ./db/sql/insert_data.sql:/docker-entrypoint-initdb.d/insert_data.sql
+    environment:
+        POSTGRES_USER: security_user
+        POSTGRES_PASSWORD: post1234
+        POSTGRES_DB: security_app
+    ports:
+        - "5632:5432"
